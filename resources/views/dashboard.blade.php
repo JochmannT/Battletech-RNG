@@ -3,7 +3,7 @@
 @section('content')
     <div class="flex justify-center">
         <div class="w-4/12 bg-white p-6 rounded-lg">
-            <form action="{{route('mechs')}}" method="post">
+            <form action="{{route('dashboard')}}" method="post">
                 @csrf
                 <div class="mb-4">
                     <label for="tonnage_min" class="sr-only">Minimum mass</label>
@@ -18,7 +18,7 @@
                     @enderror
                 </div>
                 <div class="mb-4">
-                    <label for="tonnage_max" class="sr-only">MAximum mass</label>
+                    <label for="tonnage_max" class="sr-only">Maximum mass</label>
                     <input type="number" step="5" min="20" max="100" name="tonnage_max" id="tonnage_max" class="bg-gray-100
                               border-2 w-full p-4 rounded-lg @error('tonnage_min') border-red-500 @enderror"
                            placeholder="Maximum mass, 20-100, increments of 5" value="{{old('tonnage_max')}}">

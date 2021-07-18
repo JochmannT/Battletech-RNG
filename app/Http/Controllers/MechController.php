@@ -33,8 +33,9 @@ class MechController extends Controller
         } else {
             $mech_class = 'Assault';
         }
-       if (( DB::table('meches')->select('type')->where($request->type))=='') {
-           Mech::create([
+
+       if (DB::table('meches')->select('type')->where('type',$request->type)->get() == '[]') {
+       Mech::create([
                'name' => $request->name,
                'type' => $request->type,
                'mech_class' => $mech_class,
@@ -45,7 +46,6 @@ class MechController extends Controller
            ]);
            return view('dashboard');
        }
-       return view('mechs');
-
+       else return view('mechs');
     }
 }
