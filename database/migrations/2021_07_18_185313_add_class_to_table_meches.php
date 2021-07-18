@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddForeignIdToMeches extends Migration
+class AddClassToTableMeches extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,7 @@ class AddForeignIdToMeches extends Migration
     public function up()
     {
         Schema::table('meches', function (Blueprint $table) {
-            $table->foreignId('mech_classes_id')->constrained()->onDelete('cascade');
-
+            $table->string('mech_class');
         });
     }
 
@@ -27,7 +26,7 @@ class AddForeignIdToMeches extends Migration
     public function down()
     {
         Schema::table('meches', function (Blueprint $table) {
-            $table->dropForeign('mech_classes_id');
+            $table->dropColumn('mech_class');
         });
     }
 }

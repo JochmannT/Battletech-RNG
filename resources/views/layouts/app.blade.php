@@ -21,7 +21,7 @@
             <a href="{{route('dashboard')}}" class="p-3">Dashboard</a>
         </li>
         <li>
-            <a href="{{route('posts')}}" class="p-3">Posts</a>
+            <a href="{{route('mechs')}}" class="p-3">New Mech</a>
         </li>
     </ul>
     <ul class="flex items-center">
