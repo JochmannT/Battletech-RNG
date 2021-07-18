@@ -48,7 +48,7 @@
                     <label for="tonnage" class="sr-only">Mass</label>
                     <input type="number" step="5" min="20" max="100" name="tonnage" id="tonnage" class="bg-gray-100
                               border-2 w-full p-4 rounded-lg @error('tonnage') border-red-500 @enderror"
-                           placeholder="Mass">
+                           placeholder="Mass 20-100, increments of 5">
 
                     @error('tonnage')
                     <div class="text-red-500 mt-2 text-sm">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Mech;
 use Illuminate\Http\Request;
+use function PHPUnit\Framework\isEmpty;
 
 class MechController extends Controller
 {
@@ -31,7 +32,8 @@ class MechController extends Controller
         } else {
             $mech_class = 'Assault';
         }
-        Mech::create([
+       // if(isEmpty()
+            Mech::create([
             'name'=>$request->name,
             'type'=>$request->type,
             'mech_class'=>$mech_class,
@@ -40,5 +42,7 @@ class MechController extends Controller
             'bv1'=>$request->bv1,
             'cbills'=>$request->cbills,
         ]);
+            return view('mechs');
+
     }
 }
