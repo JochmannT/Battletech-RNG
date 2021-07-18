@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Mech;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use function PHPUnit\Framework\isEmpty;
 
 class MechController extends Controller
@@ -17,7 +18,7 @@ class MechController extends Controller
     {
         $this->validate($request, [
             'name'=>'required',
-            'type'=> 'max:255',
+            'type'=> 'required|max:255',
             'tonnage'=>'required',
             'bv2'=>'required',
             'bv1'=> 'max:9999',
@@ -32,17 +33,19 @@ class MechController extends Controller
         } else {
             $mech_class = 'Assault';
         }
-       // if(isEmpty()
-            Mech::create([
-            'name'=>$request->name,
-            'type'=>$request->type,
-            'mech_class'=>$mech_class,
-            'tonnage'=>$request->tonnage,
-            'bv2'=>$request->bv2,
-            'bv1'=>$request->bv1,
-            'cbills'=>$request->cbills,
-        ]);
-            return view('mechs');
+       if (( DB::table('meches')->select('type')->where($request->type))=='') {
+           Mech::create([
+               'name' => $request->name,
+               'type' => $request->type,
+               'mech_class' => $mech_class,
+               'tonnage' => $request->tonnage,
+               'bv2' => $request->bv2,
+               'bv1' => $request->bv1,
+               'cbills' => $request->cbills,
+           ]);
+           return view('dashboard');
+       }
+       return view('mechs');
 
     }
 }
