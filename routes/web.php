@@ -24,8 +24,7 @@ Route::get('/',function () {
 })->name('home');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])
-    ->name('dashboard')
-->middleware('auth');
+    ->name('dashboard');
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'store']);
@@ -39,5 +38,6 @@ Route::post('/register', [RegisterController::class, 'store']);
 Route::get('/posts', [PostController::class, 'index'])->name('posts');
 Route::post('/posts', [PostController::class, 'store']);
 
-Route::get('/mechs', [MechController::class, 'index'])->name('mechs');
+Route::get('/mechs', [MechController::class, 'index'])->name('mechs')
+    ->middleware('auth');
 Route::post('/mechs', [MechController::class, 'store']);

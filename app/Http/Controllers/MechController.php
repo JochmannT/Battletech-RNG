@@ -16,19 +16,26 @@ class MechController extends Controller
     {
         $this->validate($request, [
             'name'=>'required',
-            'type',
-            'mech_class'=>'required',
-            'tons'=>'required',
+            'type'=> 'max:255',
+            'tonnage'=>'required',
             'bv2'=>'required',
-            'bv1',
+            'bv1'=> 'max:9999',
             'cbills'=>'required',
         ]);
-
+        if ($request->tonnage<40){
+            $mech_class = 'Light';
+        } elseif ($request->tonnage<60) {
+            $mech_class = 'Medium';
+        } elseif ($request->tonnage<80) {
+            $mech_class = 'Heavy';
+        } else {
+            $mech_class = 'Assault';
+        }
         Mech::create([
             'name'=>$request->name,
             'type'=>$request->type,
-            'mech_class'=>$request->mech_class,
-            'tons'=>$request->tons,
+            'mech_class'=>$mech_class,
+            'tonnage'=>$request->tonnage,
             'bv2'=>$request->bv2,
             'bv1'=>$request->bv1,
             'cbills'=>$request->cbills,

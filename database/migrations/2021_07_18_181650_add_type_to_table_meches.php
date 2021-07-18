@@ -15,6 +15,7 @@ class AddTypeToTableMeches extends Migration
     {
         Schema::table('meches', function (Blueprint $table) {
             $table->string('type');
+            $table->unique('type');
         });
     }
 

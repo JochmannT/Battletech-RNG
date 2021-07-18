@@ -16,10 +16,11 @@ class Mech extends Model
      */
     protected $fillable = [
         'name',
-        'class',
+        'type',
+        'mech_class',
         'tonnage',
-        'bv1',
         'bv2',
+        'bv1',
         'cbills',
     ];
 }

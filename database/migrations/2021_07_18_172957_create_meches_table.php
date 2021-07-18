@@ -17,6 +17,7 @@ class CreateMechesTable extends Migration
             $table->id();
             $table->timestamps();
             $table->text('name');
+            $table->text('mech_class');
             $table->integer('tonnage');
             $table->integer('bv1');
             $table->integer('bv2');
