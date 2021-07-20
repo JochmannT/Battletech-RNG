@@ -22,7 +22,6 @@ class DashboardController extends Controller
         $bv1min = $bv1 * 0.9;
         $bv1max = $bv1 * 1.1;
         $mechs = [];
-        // mech_class abfangen
         foreach (DB::table('meches')->select('name', 'type') //coalesce sql
                      ->where('mech_class','=', $request->mech_class)
                      ->where('bv2', '<', $bv2max)

@@ -33,11 +33,11 @@
                     <label for="type" class="sr-only">Type</label>
                     <select name="mech_class" id="mech_class" class="bg-gray-100
                             border-2 w-full p-4 rounded-lg @error('mech_class') border-red-500 @enderror">
-                        <option>No class selected</option>
-                        <option>Light</option>
-                        <option>Medium</option>
-                        <option>Heavy</option>
-                        <option>Assault</option>
+                        <option value="">No class selected</option>
+                        <option value="Light">Light</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Heavy">Heavy</option>
+                        <option value="Assault">Assault</option>
                     </select>
                     @error('mech_class')
                     <div class="text-red-500 mt-2 text-sm">
