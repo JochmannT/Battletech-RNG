@@ -13,6 +13,20 @@ class DashboardController extends Controller
         return view('dashboard');
     }
 
+    private function getMechs($column, $operator, $needle): array
+    {
+        $mechs = [];
+        if (!empty($needle)) {
+            foreach (DB::table('meches')->select('name', 'type')
+                         ->where($column, $operator, $needle)
+                         ->get()
+                     as $mech) {
+                array_push($mechs, $mech);
+            }
+        }
+        return $mechs;
+    }
+
     public function store(Request $request)
     {
         $bv2 = $request->bv2;
@@ -21,19 +35,14 @@ class DashboardController extends Controller
         $bv1 = $request->bv1;
         $bv1min = $bv1 * 0.9;
         $bv1max = $bv1 * 1.1;
-        $mechs = [];
-        foreach (DB::table('meches')->select('name', 'type') //coalesce sql
-                     ->where('mech_class','=', $request->mech_class)
-                     ->where('bv2', '<', $bv2max)
-                     ->where('bv2', '>', $bv2min)
-                     ->where('bv1', '<', $bv1max)
-                     ->where('bv1', '>', $bv1min)
-                     ->where('tonnage', '<=', intval($request->max_tonnage))
-                     ->where('tonnage', '>=', intval($request->min_tonnage))
-                    ->get()
-                 as $mech) {
-            array_push($mechs, $mech);
-        }
+        $mechs_class = $this->getMechs('mech_class', '=', $request->mech_class);
+        $mechs_bv2max = $this->getMechs('bv2', '<', $bv2max);
+        $mechs_bv2min = $this->getMechs('bv2', '>', $bv2min);
+        $mechs_bv1max = $this->getMechs('bv1', '<', $bv1max);
+        $mechs_bv1min = $this->getMechs('bv1', '>', $bv1min);
+        $mechs_tonmax = $this->getMechs('tonnage', '<=', intval($request->max_tonnage));
+        $mechs_tonmin = $this->getMechs('tonnage', '>=', intval($request->min_tonnage));
+        array_intersect($mechs_class)
         print_r($mechs);
         /*Mech::create([
             'name' => $request->name,
